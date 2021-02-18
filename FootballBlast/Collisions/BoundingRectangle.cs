@@ -76,6 +76,10 @@ namespace FootballBlast.Collisions
         {
             return CollisionHelper.Collides(this, other);
         }
+        public bool CollidesWith(BoundingCircle other)
+        {
+            return CollisionHelper.Collides(other, this);
+        }
 
     }
 }

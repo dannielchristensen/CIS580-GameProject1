@@ -6,10 +6,12 @@
   <SourceFiles>
     <File>C:/Users/danni/Documents/School/Spring 2021/CIS 580/FootballBlast/FootballBlast/Content/Bangers.spritefont</File>
     <File>C:/Users/danni/Documents/School/Spring 2021/CIS 580/FootballBlast/FootballBlast/Content/Football.png</File>
+    <File>C:/Users/danni/Documents/School/Spring 2021/CIS 580/FootballBlast/FootballBlast/Content/ksu_note.png</File>
     <File>C:/Users/danni/Documents/School/Spring 2021/CIS 580/FootballBlast/FootballBlast/Content/KUEvilFootball.png</File>
     <File>C:/Users/danni/Documents/School/Spring 2021/CIS 580/FootballBlast/FootballBlast/Content/WillieWildcat.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

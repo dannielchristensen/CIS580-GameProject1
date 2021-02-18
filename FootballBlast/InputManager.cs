@@ -11,6 +11,7 @@ namespace FootballBlast
 
     public class InputManager
     {
+
         /// <summary>
         /// denotes if the game has started
         /// </summary>
@@ -20,13 +21,22 @@ namespace FootballBlast
         /// <summary>
         /// The current direction of willie
         /// </summary>
-        public Vector2 Direction { get; private set; }
+
+
         public Vector2 NPC_Direction { get; private set; }
+        /// <summary>
+        /// float to determine the acceleration of the player.
+        /// = 1 is normal speed; < 1 means slower; > 1 means faster;
+        /// </summary>
+        public float Acceleration { get; private set; } = 1;
 
         public bool Exit{get; private set;} = false;
         public void Update(GameTime gameTime)
         {
-            Direction = new Vector2(0, 0);
+            float t = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            Vector2 acceleration = new Vector2(0, 0);
+
             priorState = currentState;
             currentState = Keyboard.GetState();
             if (currentState.IsKeyDown(Keys.Escape))
@@ -40,35 +50,12 @@ namespace FootballBlast
                 Start = !Start;
                 return;
             } 
-
-            if (currentState.IsKeyDown(Keys.Left) ||
-               currentState.IsKeyDown(Keys.A) )
-            {
-                Direction += new Vector2(-100 * (float)gameTime.ElapsedGameTime.TotalSeconds, 0);
-            }
-
-            if (currentState.IsKeyDown(Keys.Right)  ||
-                currentState.IsKeyDown(Keys.D) )
-            {
-                Direction += new Vector2(100 * (float)gameTime.ElapsedGameTime.TotalSeconds, 0);
-            }
-
-            if (currentState.IsKeyDown(Keys.Up) ||
-                currentState.IsKeyDown(Keys.W) )
-            {
-                Direction += new Vector2(0, -100 * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            }
-
-            if (currentState.IsKeyDown(Keys.Down) ||
-                currentState.IsKeyDown(Keys.S) )
-            {
-                Direction += new Vector2(0, 100 * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            }
         }
 
         public void NPC_Update_Ball(GameTime gameTime, Vector2 ballPosition, Vector2 NPCPosition)
         {
             NPC_Direction = new Vector2(0, 0);
+
 
             if (ballPosition.X < NPCPosition.X)
             {

@@ -23,9 +23,9 @@ namespace FootballBlast
         public Football(FootballGame game)
         {
             this.game = game;
+
             r = new Random();
-            Position = new Vector2(100, 100);
-            this.Punt();
+            this.Reset();
             this.bounds = new BoundingCircle(Position, 16);
 
         }
@@ -56,6 +56,15 @@ namespace FootballBlast
                 (float)r.NextDouble() * (game.GraphicsDevice.Viewport.Width-300)+100,
                 (float)r.NextDouble() * (game.GraphicsDevice.Viewport.Height-300)+200
                 );
+            bounds.Center = Position;
+
+        }
+
+        public void Reset()
+        {
+            var viewport = game.GraphicsDevice.Viewport;
+
+            Position = new Vector2(viewport.Width / 2, viewport.Height / 2);
             bounds.Center = Position;
 
         }

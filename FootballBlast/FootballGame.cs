@@ -14,6 +14,7 @@ namespace FootballBlast
         private Footballer KState;
         private Football ball;
         private SpriteFont bangers;
+        private NoteSprite noteSprite;
         private double winTimer;
         private bool win = false;
         private bool lose = false;
@@ -35,6 +36,7 @@ namespace FootballBlast
             KState = new Footballer(this, true, new Vector2(600, 200));
             ball = new Football(this);
             inputManager = new InputManager();
+            noteSprite = new NoteSprite(this);
             base.Initialize();
         }
 
@@ -44,6 +46,7 @@ namespace FootballBlast
             KU.LoadContent();
             KState.LoadContent();
             ball.LoadContent();
+            noteSprite.LoadContent(Content);
             bangers = Content.Load<SpriteFont>("bangers");
 
             // TODO: use this.Content to load your game content here
@@ -58,6 +61,7 @@ namespace FootballBlast
             }
             if (!inputManager.Start)
             {
+
                 return;
             }else if (win){
                 win = false;
@@ -66,7 +70,10 @@ namespace FootballBlast
                 ball.IsCollected = false;
                 KU.Reset(new Vector2(100, 200));
                 KState.Reset(new Vector2(600, 200));
-                ball.Punt();
+                ball.Reset();
+                KState.HasSpeedup = false;
+                noteSprite.IsCollected = false;
+                noteSprite.Spawn();
             }else if (lose)
             {
                 lose = false;
@@ -76,13 +83,17 @@ namespace FootballBlast
                 totalWins = 0;
                 KU.Reset(new Vector2(100, 200));
                 KState.Reset(new Vector2(600, 200));
-                ball.Punt();
+                ball.Reset();
+                KState.HasSpeedup = false;
+                noteSprite.IsCollected = false;
+                noteSprite.Spawn();
+
             }
-            
-            KState.Update(inputManager.Direction);
+
+            KState.Update(gameTime);
             // TODO: Add your update logic here
             inputManager.NPC_Update_Ball(gameTime, ball.Position, KU.Position);
-            KU.Update(inputManager.NPC_Direction);
+            KU.UpdateNPC(inputManager.NPC_Direction);
             if (!ball.IsCollected && ball.Bounds.CollidesWith(KState.Bounds))
             {
                 ball.IsCollected = true;
@@ -93,7 +104,18 @@ namespace FootballBlast
             {
                 ball.Update(new Vector2(KState.Position.X, KState.Position.Y + 20));
             }
+            if(!noteSprite.IsCollected && KState.Bounds.CollidesWith(noteSprite.Bounds))
+            {
+                noteSprite.IsCollected = true;
+                KState.HasSpeedup = true;
+                totalPunts--;
+            }
+            if (!noteSprite.IsCollected && KU.Bounds.CollidesWith(noteSprite.Bounds))
+            {
+                noteSprite.IsCollected = true;
+                KState.HasSpeedup = false;
 
+            }
             if (!ball.IsCollected && ball.Bounds.CollidesWith(KU.Bounds))
             {
                 ball.Punt();
@@ -109,7 +131,14 @@ namespace FootballBlast
                 KState.HasBall = false;
                 ball.Punt();
                 totalPunts++;
+                
 
+            }
+            if(KState.Bounds.CollidesWith(KU.Bounds) || KU.Bounds.CollidesWith(KState.Bounds))
+            {
+                noteSprite.IsCollected = false;
+                noteSprite.Spawn();
+                KState.HasSpeedup = false;
             }
             if (KState.HasBall)
             {
@@ -165,6 +194,7 @@ namespace FootballBlast
                 KU.Draw(gameTime, spriteBatch);
                 KState.Draw(gameTime, spriteBatch);
                 ball.Draw(spriteBatch);
+                if(!noteSprite.IsCollected) noteSprite.Draw(gameTime, spriteBatch);
             }
             spriteBatch.DrawString(bangers, $"Total Wins: {totalWins}", new Vector2(2* this.GraphicsDevice.Viewport.Width / 4, 10), Color.Purple);
             spriteBatch.DrawString(bangers, $"Total Punts: {totalPunts}", new Vector2(3 * this.GraphicsDevice.Viewport.Width / 4, 10), Color.Blue);

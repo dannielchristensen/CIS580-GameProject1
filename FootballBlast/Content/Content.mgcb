@@ -32,6 +32,18 @@
 /processorParam:TextureFormat=Color
 /build:Football.png
 
+#begin ksu_note.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ksu_note.png
+
 #begin KUEvilFootball.png
 /importer:TextureImporter
 /processor:TextureProcessor
