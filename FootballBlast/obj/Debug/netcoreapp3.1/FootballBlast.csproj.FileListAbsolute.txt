@@ -39,3 +39,6 @@ C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\
 C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\obj\Debug\netcoreapp3.1\FootballBlast.genruntimeconfig.cache
 C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\bin\Debug\netcoreapp3.1\Content\Bangers.xnb
 C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\bin\Debug\netcoreapp3.1\Content\ksu_note.xnb
+C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\bin\Debug\netcoreapp3.1\Content\Powerup24.xnb
+C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\bin\Debug\netcoreapp3.1\Content\Randomize11.xnb
+C:\Users\danni\Documents\School\Spring 2021\CIS 580\FootballBlast\FootballBlast\bin\Debug\netcoreapp3.1\Content\Pickup_Coin62.xnb

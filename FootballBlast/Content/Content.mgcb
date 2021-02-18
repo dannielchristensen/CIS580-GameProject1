@@ -56,6 +56,24 @@
 /processorParam:TextureFormat=Color
 /build:KUEvilFootball.png
 
+#begin Pickup_Coin62.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Pickup_Coin62.wav
+
+#begin Powerup24.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Powerup24.wav
+
+#begin Randomize11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Randomize11.wav
+
 #begin WillieWildcat.png
 /importer:TextureImporter
 /processor:TextureProcessor

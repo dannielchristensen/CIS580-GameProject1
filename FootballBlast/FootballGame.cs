@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System;
 
 namespace FootballBlast
@@ -8,6 +9,9 @@ namespace FootballBlast
     public class FootballGame : Game
     {
         private GraphicsDeviceManager graphics;
+        private SoundEffect tackle;
+        private SoundEffect playBand;
+        private SoundEffect pickupBall;
         private SpriteBatch spriteBatch;
         private InputManager inputManager;
         private Footballer KU;
@@ -37,6 +41,9 @@ namespace FootballBlast
             ball = new Football(this);
             inputManager = new InputManager();
             noteSprite = new NoteSprite(this);
+            tackle = Content.Load<SoundEffect>("Randomize11");
+            playBand = Content.Load<SoundEffect>("Powerup24");
+            pickupBall = Content.Load<SoundEffect>("Pickup_Coin62");
             base.Initialize();
         }
 
@@ -96,6 +103,7 @@ namespace FootballBlast
             KU.UpdateNPC(inputManager.NPC_Direction);
             if (!ball.IsCollected && ball.Bounds.CollidesWith(KState.Bounds))
             {
+                pickupBall.Play();
                 ball.IsCollected = true;
                 KState.HasBall = true;
                 winTimer = 0;
@@ -108,6 +116,7 @@ namespace FootballBlast
             {
                 noteSprite.IsCollected = true;
                 KState.HasSpeedup = true;
+                playBand.Play();
                 totalPunts--;
             }
             if (!noteSprite.IsCollected && KU.Bounds.CollidesWith(noteSprite.Bounds))
@@ -127,6 +136,7 @@ namespace FootballBlast
 
             if (ball.IsCollected && (KState.Bounds.CollidesWith(KU.Bounds) || KU.Bounds.CollidesWith(KState.Bounds)))
             {
+                tackle.Play();
                 ball.IsCollected = false;
                 KState.HasBall = false;
                 ball.Punt();
@@ -136,6 +146,7 @@ namespace FootballBlast
             }
             if(KState.Bounds.CollidesWith(KU.Bounds) || KU.Bounds.CollidesWith(KState.Bounds))
             {
+                tackle.Play();
                 noteSprite.IsCollected = false;
                 noteSprite.Spawn();
                 KState.HasSpeedup = false;
